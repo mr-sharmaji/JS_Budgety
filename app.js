@@ -13,6 +13,34 @@ var budgetController = (function () {
         }
     }
     */
+
+    var Expense = function(id, description, value){
+        this.id = id;
+        this.description = description
+        this.value = value
+    }
+
+    var Income = function(id, description, value){
+        this.id = id;
+        this.description = description
+        this.value = value
+    }
+
+    var allExpenses = [];
+    var allIncomes = [];
+    var totalExpenses = 0;
+    var total
+
+    var data = {
+        allItems: {
+            exp: [],
+            inc: [],
+        }, 
+        totats: {
+            exp: 0,
+            inc: 0,
+        }
+    }
 })();
 /*
 UI CONTROLLER
