@@ -161,6 +161,12 @@ var UIController = (function () {
         return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
     }
 
+    var nodeListForEach = function(list, callback){
+        for(var i = 0; i< list.length; i++){
+            callback(list[i], i)
+        }
+    }
+
     return {
         getInput: function () {
             return {
@@ -227,11 +233,7 @@ var UIController = (function () {
         displayPercentages(perArr){
             var fields = document.querySelectorAll(DOMStrings.expensesPercentageLabel);
 
-            var nodeListForEach = function(list, callback){
-                for(var i = 0; i< list.length; i++){
-                    callback(list[i], i)
-                }
-            }
+            
 
             nodeListForEach(fields, function(current, index){
                 if(perArr[index] > 0)
@@ -250,6 +252,13 @@ var UIController = (function () {
             document.querySelector(DOMStrings.dateLabel).textContent = months[month]+", "+year;
         },
 
+        changeType: function() {
+           var fields = document.querySelectorAll(DOMStrings.inputType + ',' + DOMStrings.inputDescription+','+ DOMStrings.inputValue)
+            nodeListForEach(fields, function(curr){
+                curr.classList.toggle('red-focus')
+            });
+            document.querySelector(DOMStrings.inputBtn).classList.toggle('red')
+        },
         getDOMstrings: function(){
             return DOMStrings;
         }
@@ -272,6 +281,7 @@ var controller = (function (budgetCtrl, UICtrl) {
             }
         });
         document.querySelector(DOM.container).addEventListener('click', ctrlDeleteItem)
+        document.querySelector(DOM.inputType).addEventListener('change', UICtrl.changeType)
     }
 
     
